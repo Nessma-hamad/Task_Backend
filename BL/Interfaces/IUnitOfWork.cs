@@ -14,5 +14,11 @@ namespace BL.Interfaces
 
 
         AccountRepository Account { get; }
+        AnswerRepository Answer { get; }
+        CandidateAnswerRepository CandidateAnswer { get; }
+        CandidateRepository Candidate { get; }
+        JobPositionRepository JobPosition { get; }
+
+        QuestionRepository Question { get; }
     }
 }

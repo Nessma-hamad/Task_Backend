@@ -54,7 +54,12 @@ namespace API
             services.AddTransient<UserManager<User>>();
             services.AddTransient<RoleManager<IdentityRole>>();
             services.AddTransient<AccountAppService>();
-            
+            services.AddTransient<JobPositionAppservice>();
+            services.AddTransient<QuestionAppservice>();
+            services.AddTransient<AnswerAppservice>();
+            services.AddTransient<CandidateAppservice>();
+            services.AddTransient<CandidateAnswerAppservice>();
+
             services.AddHttpContextAccessor();//allow me to get user information such as id
             services.AddAutoMapper(typeof(Startup));
 

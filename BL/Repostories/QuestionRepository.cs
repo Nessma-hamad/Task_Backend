@@ -1,4 +1,5 @@
 ﻿using BL.Bases;
+using DAL;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,8 +13,8 @@ namespace BL.Repostories
    
     public class QuestionRepository : BaseRepository<Question>
     {
-        private DbContext EC_DbContext;
-        public QuestionRepository(DbContext EC_DbContext) : base(EC_DbContext)
+        private JrTaskDbContext EC_DbContext;
+        public QuestionRepository(JrTaskDbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
@@ -21,6 +22,11 @@ namespace BL.Repostories
         {
             return GetAll().ToList();
         }
+        public List<Question> GetJobPositionQuestions(int JobPostionID)
+        {
+            return EC_DbContext.Questions.Where<Question>(q => q.JobPositionID == JobPostionID).Take<Question>(5).ToList();
+        }
+
 
         public bool InsertQuestion(Question Question)
         {

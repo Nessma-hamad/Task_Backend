@@ -1,4 +1,5 @@
 ﻿using BL.Bases;
+using DAL;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,14 +13,18 @@ namespace BL.Repostories
 
     public class AnswerRepository : BaseRepository<Answer>
     {
-        private DbContext EC_DbContext;
-        public AnswerRepository(DbContext EC_DbContext) : base(EC_DbContext)
+        private JrTaskDbContext EC_DbContext;
+        public AnswerRepository(JrTaskDbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
         public List<Answer> GetAllAnswers()
         {
             return GetAll().ToList();
+        }
+        public List<Answer> GetAllQuestionAnswes(int QuestionID)
+        {
+            return EC_DbContext.Answers.Where<Answer>(a => a.QuestionID == QuestionID).ToList();
         }
 
         public bool InsertAnswer(Answer Answer)

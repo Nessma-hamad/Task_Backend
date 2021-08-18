@@ -43,6 +43,60 @@ namespace BL.Bases
             }
         }
 
+        public AnswerRepository answer;
+        public AnswerRepository Answer
+        {
+            get
+            {
+                if (answer == null)
+                    answer = new AnswerRepository(EC_DbContext);
+                return answer;
+            }
+        }
+
+        public CandidateAnswerRepository candidateAnswer;
+        public CandidateAnswerRepository CandidateAnswer
+        {
+            get
+            {
+                if (candidateAnswer == null)
+                    candidateAnswer = new CandidateAnswerRepository(EC_DbContext);
+                return candidateAnswer;
+            }
+        }
+
+        public CandidateRepository candidate;
+        public CandidateRepository Candidate
+        {
+            get
+            {
+                if (candidate == null)
+                    candidate = new CandidateRepository(EC_DbContext);
+                return candidate;
+            }
+        }
+
+        public JobPositionRepository jobPosition;
+        public JobPositionRepository JobPosition
+        {
+            get
+            {
+                if (jobPosition == null)
+                    jobPosition = new JobPositionRepository(EC_DbContext);
+                return jobPosition;
+            }
+        }
+
+        public QuestionRepository guestion;
+        public QuestionRepository Question
+        {
+            get
+            {
+                if (guestion == null)
+                    guestion = new QuestionRepository(EC_DbContext);
+                return guestion;
+            }
+        }
 
     }
 }
