@@ -26,18 +26,24 @@ namespace WebAPI.Controllers
         {
             return _CandidateAnswerAppservice.GetAllCandidateAnswers();
         }
+        [HttpGet("/GetCandidateAnswersByID")]
+        // [AllowAnonymous]
+        public ActionResult<IEnumerable<CandidateAnswerDto>> GetCandidateAnswersByID(int candidateID)
+        {
+            return _CandidateAnswerAppservice.GetCandidateAnswersByID(candidateID);
+        }
         //[AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<CandidateAnswerDto> GetCandidateAnswer(int id)
         {
-            var brands = _CandidateAnswerAppservice.GetCandidateAnswer(id);
+            var candidateAnswers = _CandidateAnswerAppservice.GetCandidateAnswer(id);
 
-            if (brands == null)
+            if (candidateAnswers == null)
             {
                 return NotFound();
             }
 
-            return brands;
+            return candidateAnswers;
         }
         // [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]

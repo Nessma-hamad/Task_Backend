@@ -21,6 +21,10 @@ namespace BL.AppServices
         {
             return mapper.Map<List<CandidateAnswerDto>>(TheUnitOfWork.CandidateAnswer.GetAllCandidateAnswers());
         }
+        public List<CandidateAnswerDto> GetCandidateAnswersByID(int candidateID)
+        {
+            return mapper.Map<List<CandidateAnswerDto>>(TheUnitOfWork.CandidateAnswer.GetAllCandidateAnswersByID(candidateID));
+        }
         public CandidateAnswerDto GetCandidateAnswer(int id)
         {
             if (id < 0)

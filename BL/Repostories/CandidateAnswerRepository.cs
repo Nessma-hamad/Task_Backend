@@ -1,4 +1,5 @@
 ﻿using BL.Bases;
+using DAL;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,8 +13,8 @@ namespace BL.Repostories
 
     public class CandidateAnswerRepository : BaseRepository<CandidateAnswer>
     {
-        private DbContext EC_DbContext;
-        public CandidateAnswerRepository(DbContext EC_DbContext) : base(EC_DbContext)
+        private JrTaskDbContext EC_DbContext;
+        public CandidateAnswerRepository(JrTaskDbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
@@ -21,6 +22,11 @@ namespace BL.Repostories
         {
             return GetAll().ToList();
         }
+        public List<CandidateAnswer> GetAllCandidateAnswersByID(int candidateID)
+        {
+            return EC_DbContext.CandidateAnswers.Where<CandidateAnswer>(a => a.CandidateID == candidateID).ToList();
+        }
+
 
         public bool InsertCandidateAnswer(CandidateAnswer CandidateAnswer)
         {

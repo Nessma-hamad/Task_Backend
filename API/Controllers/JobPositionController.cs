@@ -32,14 +32,14 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<JobPositionDto> GetJobPosition(int id)
         {
-            var brands = _jobPositionAppservice.GetJobPosition(id);
+            var jobPositions = _jobPositionAppservice.GetJobPosition(id);
 
-            if (brands == null)
+            if (jobPositions == null)
             {
                 return NotFound();
             }
 
-            return brands;
+            return jobPositions;
         }
        // [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]

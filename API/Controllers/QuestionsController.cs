@@ -37,14 +37,14 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<QuestionDto> GetQuestion(int id)
         {
-            var brands = _QuestionAppservice.GetQuestion(id);
+            var questions = _QuestionAppservice.GetQuestion(id);
 
-            if (brands == null)
+            if (questions == null)
             {
                 return NotFound();
             }
 
-            return brands;
+            return questions;
         }
         // [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]

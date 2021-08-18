@@ -30,14 +30,14 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<CandidateDto> GetCandidate(int id)
         {
-            var brands = _CandidateAppservice.GetCandidate(id);
+            var candidates = _CandidateAppservice.GetCandidate(id);
 
-            if (brands == null)
+            if (candidates == null)
             {
                 return NotFound();
             }
 
-            return brands;
+            return candidates;
         }
         // [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
