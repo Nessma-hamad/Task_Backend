@@ -21,18 +21,18 @@ namespace WebAPI.Controllers
             _CandidateAnswerAppservice = CandidateAnswerAppservice;
         }
         [HttpGet]
-        // [AllowAnonymous]
+       
         public ActionResult<IEnumerable<CandidateAnswerDto>> GetCandidateAnswers()
         {
             return _CandidateAnswerAppservice.GetAllCandidateAnswers();
         }
         [HttpGet("/GetCandidateAnswersByID")]
-        // [AllowAnonymous]
+       
         public ActionResult<IEnumerable<CandidateAnswerDto>> GetCandidateAnswersByID(int candidateID)
         {
             return _CandidateAnswerAppservice.GetCandidateAnswersByID(candidateID);
         }
-        //[AllowAnonymous]
+       
         [HttpGet("{id}")]
         public ActionResult<CandidateAnswerDto> GetCandidateAnswer(int id)
         {
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
 
             return candidateAnswers;
         }
-        // [Authorize(Roles = "Admin")]
+       
         [HttpPut("{id}")]
         public IActionResult PutCandidateAnswer(int id, CandidateAnswerDto CandidateAnswerDto)
         {
@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        // [Authorize(Roles = "Admin")]
+       
         [HttpPost]
         public ActionResult<CandidateAnswerDto> PostCandidateAnswer(CandidateAnswerDto CandidateAnswerDto)
         {
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
 
         }
         
-        // [Authorize(Roles = "Admin")]
+       
         [HttpDelete("{id}")]
         public IActionResult DeleteCandidateAnswer(int id)
         {

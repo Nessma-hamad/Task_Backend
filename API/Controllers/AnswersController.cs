@@ -1,5 +1,6 @@
 ﻿using BL.AppServices;
 using BL.DtoModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,12 +22,12 @@ namespace WebAPI.Controllers
             _AnswerAppservice = AnswerAppservice;
         }
         [HttpGet]
-        // [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<AnswerDto>> GetAnswers()
         {
             return _AnswerAppservice.GetAllAnswers();
         }
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<AnswerDto> GetAnswer(int id)
         {
@@ -39,6 +40,7 @@ namespace WebAPI.Controllers
 
             return answers;
         }
+        [AllowAnonymous]
         [HttpGet("/QuestionAnswes")]
         public ActionResult<IEnumerable<AnswerDto>> QuestionAnswes(int QuestionID)
         {
@@ -51,7 +53,7 @@ namespace WebAPI.Controllers
 
             return answers;
         }
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutAnswer(int id, AnswerDto AnswerDto)
         {
@@ -66,7 +68,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<AnswerDto> PostAnswer(AnswerDto AnswerDto)
         {
@@ -74,7 +76,7 @@ namespace WebAPI.Controllers
             return CreatedAtAction("GetAnswers", AnswerDto);
 
         }
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteAnswer(int id)
         {

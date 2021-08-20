@@ -22,24 +22,24 @@ namespace WebAPI.Controllers
             _QuestionAppservice = QuestionAppservice;
         }
         [HttpGet]
-        // [AllowAnonymous]
+         [AllowAnonymous]
         public ActionResult<IEnumerable<QuestionDto>> GetQuestions()
         {
             return _QuestionAppservice.GetAllQuestions();
         }
         [HttpGet("/JobPositionQuestions")]
-        // [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<QuestionDto>> GetJobPositionQuestions(int JobPostionID)
         {
             return _QuestionAppservice.GetJobPositionQuestions(JobPostionID);
         }
         [HttpGet("/AllJobPositionQuestions")]
-        // [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<QuestionDto>> GetAllJobPositionQuestions(int JobPostionID)
         {
             return _QuestionAppservice.GetAllJobPositionQuestions(JobPostionID);
         }
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<QuestionDto> GetQuestion(int id)
         {
@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
 
             return questions;
         }
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutQuestion(int id, QuestionDto QuestionDto)
         {
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<QuestionDto> PostQuestion(QuestionDto QuestionDto)
         {
@@ -75,7 +75,7 @@ namespace WebAPI.Controllers
             return CreatedAtAction("GetQuestions", question);
 
         }
-        // [Authorize(Roles = "Admin")]
+         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteQuestion(int id)
         {

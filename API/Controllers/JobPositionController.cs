@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
             _jobPositionAppservice = jobPositionAppservice;
         }
         [HttpGet]
-       // [AllowAnonymous]
+       [AllowAnonymous]
         public ActionResult<IEnumerable<JobPositionDto>> GetJobPositions()
         {
             return _jobPositionAppservice.GetAllJobPositions();
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
 
             return jobPositions;
         }
-       // [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutJobPosition(int id, JobPositionDto JobPositionDto)
         {
@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-       // [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<JobPositionDto> PostJobPosition(JobPositionDto JobPositionDto)
         {
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             return CreatedAtAction("GetJobPositions", JobPositionDto);
 
         }
-       // [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteJobPosition(int id)
         {
