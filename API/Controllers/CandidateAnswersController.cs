@@ -68,6 +68,7 @@ namespace WebAPI.Controllers
             return CreatedAtAction("GetCandidateAnswers", CandidateAnswerDto);
 
         }
+        
         // [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteCandidateAnswer(int id)

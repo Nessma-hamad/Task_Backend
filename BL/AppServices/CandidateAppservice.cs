@@ -1,6 +1,7 @@
 ﻿using BL.Bases;
 using BL.DtoModels;
 using BL.Interfaces;
+using DAL;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ namespace BL.AppServices
 {
     public class CandidateAppservice : BaseAppService
     {
-        public CandidateAppservice(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
+        JrTaskDbContext _DbContext;
+        public CandidateAppservice(JrTaskDbContext DbContext,IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
-
+            _DbContext = DbContext;
         }
         public List<CandidateDto> GetAllCandidates()
         {
@@ -26,21 +28,22 @@ namespace BL.AppServices
                 throw new ArgumentNullException();
             return mapper.Map<CandidateDto>(TheUnitOfWork.Candidate.GetCandidateById(id));
         }
-        public bool CreateCandidate(CandidateDto CandidateDto)
+        public CandidateDto CreateCandidate(CandidateDto CandidateDto) 
         {
             if (CandidateDto == null)
 
                 throw new ArgumentNullException();
 
 
-
+            var newCandidate = new CandidateDto();
             bool result = false;
             var candidate = mapper.Map<Candidate>(CandidateDto);
             if (TheUnitOfWork.Candidate.InsertCandidate(candidate))
             {
                 result = TheUnitOfWork.Commit() > new int();
+                newCandidate = mapper.Map<CandidateDto>(_DbContext.Candidates.OrderByDescending(c => c.ID).FirstOrDefault());
             }
-            return result;
+            return newCandidate;
         }
         public bool DeleteCandidate(int id)
         {

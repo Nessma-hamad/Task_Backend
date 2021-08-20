@@ -94,6 +94,12 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
+            app.UseCors(
+               options => options
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true) // allow any origin
+               .AllowCredentials());
 
             app.UseRouting();
 

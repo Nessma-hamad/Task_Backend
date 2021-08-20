@@ -58,8 +58,8 @@ namespace WebAPI.Controllers
         [HttpPost]
         public ActionResult<CandidateDto> PostCandidate(CandidateDto CandidateDto)
         {
-            _CandidateAppservice.CreateCandidate(CandidateDto);
-            return CreatedAtAction("GetCandidates", CandidateDto);
+            var Candidate= _CandidateAppservice.CreateCandidate(CandidateDto);
+            return CreatedAtAction("GetCandidates", Candidate);
 
         }
         // [Authorize(Roles = "Admin")]

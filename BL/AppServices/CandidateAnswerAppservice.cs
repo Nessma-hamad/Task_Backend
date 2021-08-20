@@ -5,7 +5,7 @@ using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text; 
 using System.Threading.Tasks;
 
 namespace BL.AppServices
@@ -47,6 +47,7 @@ namespace BL.AppServices
             }
             return result;
         }
+       
         public bool DeleteCandidateAnswer(int id)
         {
             if (id < 0)

@@ -33,6 +33,12 @@ namespace WebAPI.Controllers
         {
             return _QuestionAppservice.GetJobPositionQuestions(JobPostionID);
         }
+        [HttpGet("/AllJobPositionQuestions")]
+        // [AllowAnonymous]
+        public ActionResult<IEnumerable<QuestionDto>> GetAllJobPositionQuestions(int JobPostionID)
+        {
+            return _QuestionAppservice.GetAllJobPositionQuestions(JobPostionID);
+        }
         //[AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<QuestionDto> GetQuestion(int id)
@@ -65,8 +71,8 @@ namespace WebAPI.Controllers
         [HttpPost]
         public ActionResult<QuestionDto> PostQuestion(QuestionDto QuestionDto)
         {
-            _QuestionAppservice.CreateQuestion(QuestionDto);
-            return CreatedAtAction("GetQuestions", QuestionDto);
+           var question= _QuestionAppservice.CreateQuestion(QuestionDto);
+            return CreatedAtAction("GetQuestions", question);
 
         }
         // [Authorize(Roles = "Admin")]

@@ -1,6 +1,7 @@
 ﻿using BL.Bases;
 using BL.DtoModels;
 using BL.Interfaces;
+using DAL;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,10 @@ namespace BL.AppServices
   
     public class QuestionAppservice : BaseAppService
     {
-        public QuestionAppservice(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
+        JrTaskDbContext _DbContext;
+        public QuestionAppservice(JrTaskDbContext DbContext,IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
+            _DbContext = DbContext;
 
         }
         public List<QuestionDto> GetAllQuestions()
@@ -25,27 +28,33 @@ namespace BL.AppServices
         {
             return mapper.Map<List<QuestionDto>>(TheUnitOfWork.Question.GetJobPositionQuestions(JobPostionID));
         }
+        public List<QuestionDto> GetAllJobPositionQuestions(int JobPostionID)
+        {
+            return mapper.Map<List<QuestionDto>>(TheUnitOfWork.Question.GetAllJobPositionQuestions(JobPostionID));
+        }
         public QuestionDto GetQuestion(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
             return mapper.Map<QuestionDto>(TheUnitOfWork.Question.GetQuestionById(id));
         }
-        public bool CreateQuestion(QuestionDto QuestionDto)
+        public QuestionDto CreateQuestion(QuestionDto questionDto)
         {
-            if (QuestionDto == null)
+            if (questionDto == null)
 
                 throw new ArgumentNullException();
 
 
-
+            var lastQuestion = new QuestionDto() ;
             bool result = false;
-            var Question = mapper.Map<Question>(QuestionDto);
+            var Question = mapper.Map<Question>(questionDto);
             if (TheUnitOfWork.Question.InsertQuestion(Question))
             {
                 result = TheUnitOfWork.Commit() > new int();
+                 lastQuestion= mapper.Map <QuestionDto> (_DbContext.Questions.OrderByDescending(q=>q.ID).FirstOrDefault());
+
             }
-            return result;
+            return lastQuestion;
         }
         public bool DeleteQuestion(int id)
         {

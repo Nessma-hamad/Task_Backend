@@ -27,7 +27,10 @@ namespace BL.Repostories
             return EC_DbContext.Questions.Where<Question>(q => q.JobPositionID == JobPostionID).Take<Question>(5).ToList();
         }
 
-
+        public List<Question> GetAllJobPositionQuestions(int JobPostionID)
+        {
+            return EC_DbContext.Questions.Where<Question>(q => q.JobPositionID == JobPostionID).ToList();
+        }
         public bool InsertQuestion(Question Question)
         {
             return Insert(Question);

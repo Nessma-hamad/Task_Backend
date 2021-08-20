@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BL.Repostories
 {
-
+     
     public class CandidateAnswerRepository : BaseRepository<CandidateAnswer>
     {
         private JrTaskDbContext EC_DbContext;
@@ -32,6 +32,7 @@ namespace BL.Repostories
         {
             return Insert(CandidateAnswer);
         }
+        
         public void UpdateCandidateAnswer(CandidateAnswer CandidateAnswer)
         {
             Update(CandidateAnswer);
