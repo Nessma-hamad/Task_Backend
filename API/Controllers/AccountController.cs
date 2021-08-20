@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             else
                 return BadRequest(user.Errors.ToList()[0]);
         }
-        //[Authorize(Roles = "Admin")]
+       
         [HttpPost("AdminRegister")]
         public async Task<IActionResult> RegisterAdmin(RegisterationDto userAccount)
         {
