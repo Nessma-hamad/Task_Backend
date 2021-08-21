@@ -1,6 +1,6 @@
 ﻿using BL.AppServices;
 using BL.DtoModels;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-       
+      
         [HttpPost]
         public ActionResult<JobPositionDto> PostJobPosition(JobPositionDto JobPositionDto)
         {

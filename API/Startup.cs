@@ -40,6 +40,7 @@ namespace API
                           .AddDefaultTokenProviders();
             services.AddCors(CorsOptions => CorsOptions.AddPolicy("MyPolicy",
               builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()));
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -102,7 +103,8 @@ namespace API
                .AllowCredentials());
 
             app.UseRouting();
-
+            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
